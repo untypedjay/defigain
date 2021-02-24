@@ -3,16 +3,17 @@ import './App.css';
 import { TextInput } from './components/Input';
 import { Button } from './components/Button';
 import { getAccount } from './api/defichain';
+import { formatAccount } from './util/converter';
 
 function App() {
   const [address, setAddress] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const [account, setAccount] = useState([]);
+  const [account, setAccount] = useState<any>(null);
 
   const getAccountBalance = async () => {
     setIsLoading(true);
     const data = await getAccount(address);
-    setAccount(data);
+    setAccount(formatAccount(data));
     setIsLoading(false);
   }
 
@@ -20,24 +21,19 @@ function App() {
     setAddress(event.target.value);
   };
 
-  const handleButtonClick = () => {
-    getAccountBalance();
-    alert(account);
-  };
-
   return (
     <div>
       <div>
         <TextInput onChange={handleInputChange}>{ address }</TextInput>
-        <Button onClick={handleButtonClick} disabled={!address} loading={isLoading}>GO</Button>
+        <Button onClick={getAccountBalance} disabled={!address} loading={isLoading}>GO</Button>
       </div>
-      { !isLoading && account.length > 0 ?
+      { !isLoading && account ?
         <div>
-          <p>{ account[0] } DFI</p>
-          <p>{ account[1] } ETH</p>
-          <p>{ account[2] } BTC</p>
-          <p>{ account[3] } ETH-DFI</p>
-          <p>{ account[4] } BTC-DFI</p>
+          <p>{ account.dfi } DFI</p>
+          <p>{ account.eth } ETH</p>
+          <p>{ account.btc } BTC</p>
+          <p>{ account['eth-dfi'] } ETH-DFI</p>
+          <p>{ account['btc-dfi'] } BTC-DFI</p>
         </div> :
         null
       }
