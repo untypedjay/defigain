@@ -1,4 +1,5 @@
 import React from 'react';
+import { Layout } from '../components/Layout';
 
 interface Props {
   match: any;
@@ -7,8 +8,8 @@ interface Props {
 export default function Portfolio({ match }: Props) {
   const { portfolioName } = match.params;
   return (
-    <div>
+    <Layout>
       Portfolio { portfolioName }
-    </div>
+    </Layout>
   );
 }
