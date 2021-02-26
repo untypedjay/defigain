@@ -9,6 +9,7 @@ interface Props {
 
 const StyledBreadcrumb = styled.p`
   color: var(--clr-text);
+  width: 400px;
 `;
 
 const StyledBasepath = styled.span`
