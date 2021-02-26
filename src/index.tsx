@@ -25,7 +25,7 @@ export default function App() {
     <BrowserRouter>
       <Switch>
         <Route exact path="/" component={Home}/>
-        <Route exact path="/p/:portfolioName" component={Portfolio}/>
+        <Route exact path="/portfolios/:portfolioName" component={Portfolio}/>
         <Route exact path="/portfolios" component={Portfolios}/>
         <Route exact path="/settings" component={Settings}/>
         <Route exact path="/new" component={New}/>
