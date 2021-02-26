@@ -1,4 +1,5 @@
-import React, { MouseEvent } from 'react';
+import React from 'react';
+import styled from 'styled-components';
 
 interface Props {
   loading?: boolean;
@@ -7,6 +8,23 @@ interface Props {
   tabIndex?: number;
   onClick: () => void;
 }
+
+const StyledButton = styled.button`
+  background-color: var(--clr-accent);
+  color: var(--clr-primary);
+  padding: 10px 16px;
+  line-height: 20px;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: var(--br-button);
+  outline: none;
+  border: 0;
+  text-transform: uppercase;
+  
+  &:not(:disabled) {
+    cursor: pointer;
+  }
+`;
 
 export default function Button({
   loading = false,
@@ -18,7 +36,7 @@ export default function Button({
   const isDisabled = loading || disabled;
 
   return (
-    <button
+    <StyledButton
       type="button"
       disabled={isDisabled}
       tabIndex={isDisabled ? -1 : tabIndex}
@@ -26,6 +44,6 @@ export default function Button({
       onClick={onClick}
     >
       { children }
-    </button>
+    </StyledButton>
   );
 }
