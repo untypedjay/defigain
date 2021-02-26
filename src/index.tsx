@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { GlobalStyle } from './styles/GlobalStyle';
 import Home from './pages/Home';
 import Portfolio from './pages/Portfolio';
 import NotFound from './pages/NotFound';
@@ -13,6 +14,7 @@ import './index.css';
 
 ReactDOM.render(
   <React.StrictMode>
+    <GlobalStyle/>
     <App/>
   </React.StrictMode>,
   document.querySelector('#root')
