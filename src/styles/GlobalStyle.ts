@@ -4,6 +4,7 @@ export const GlobalStyle = createGlobalStyle`
   :root {
     --clr-accent: #AD09D7;
     --clr-primary: #F4F3F6;
+    --clr-primary-hover: #CBC6D2;
     --clr-secondary: #FFFFFF;
     --clr-text: #363636;
     --clr-disabled: #9C9C9C;
@@ -19,6 +20,7 @@ export const GlobalStyle = createGlobalStyle`
     --br-button: 4px;
     
     --box-shadow: 0 8px 16px 0 rgb(0 0 0 / 4%);
+    --hover-transition: 0.2s ease;
   }
   
   * {
