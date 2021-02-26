@@ -19,7 +19,11 @@ const StyledButton = styled.button`
   border-radius: var(--br-button);
   outline: none;
   border: 0;
-  text-transform: uppercase;
+  transition: var(--hover-transition);
+  
+  &:hover {
+    background-color: var(--clr-accent-hover);
+  }
   
   &:not(:disabled) {
     cursor: pointer;

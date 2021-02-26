@@ -17,7 +17,7 @@ export default function NotFound() {
       <p>4<FaMeteor/>4</p>
       <h3>Houston, we have a problem.</h3>
       <p>Actually, the page you are looking for does not exist.</p>
-      <Button onClick={() => history.push('/')}>Return home</Button>
+      <Button onClick={() => history.push('/')}>Return Home</Button>
     </StyledNotFound>
   );
 }

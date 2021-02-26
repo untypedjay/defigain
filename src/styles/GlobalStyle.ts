@@ -3,6 +3,7 @@ import { createGlobalStyle } from 'styled-components';
 export const GlobalStyle = createGlobalStyle`
   :root {
     --clr-accent: #AD09D7;
+    --clr-accent-hover: #8E07B0;
     --clr-primary: #F4F3F6;
     --clr-primary-hover: #CBC6D2;
     --clr-secondary: #FFFFFF;
