@@ -7,6 +7,7 @@ interface Props {
   children: string;
   tabIndex?: number;
   onClick: () => void;
+  title?: string;
 }
 
 const StyledButton = styled.button`
@@ -35,7 +36,8 @@ export default function Button({
   disabled = false,
   children,
   tabIndex = 0,
-  onClick
+  onClick,
+  title
 }: Props) {
   const isDisabled = loading || disabled;
 
@@ -46,6 +48,7 @@ export default function Button({
       tabIndex={isDisabled ? -1 : tabIndex}
       aria-busy={loading}
       onClick={onClick}
+      title={title}
     >
       { children }
     </StyledButton>
