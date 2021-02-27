@@ -25,3 +25,13 @@ export function formatPath(path: string) {
 export function capitalize(string: string) {
   return string.replace(/^\w/, (c) => c.toUpperCase());
 }
+
+export function createSteps(amount: number) {
+  const result = [];
+
+  for (let i = 1; i <= amount; i++) {
+    result.push(i);
+  }
+
+  return result;
+}
