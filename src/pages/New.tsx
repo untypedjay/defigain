@@ -1,13 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Layout } from '../components/Layout';
-import { Stepper } from '../components/Stepper';
+import { Wizard } from '../components/Wizard';
 
 export default function New() {
-  const [activeStep, setActiveStep] = useState(1);
-
   return (
     <Layout>
-      <Stepper activeStep={activeStep} setActiveStep={setActiveStep}/>
+      <Wizard/>
     </Layout>
   );
 }

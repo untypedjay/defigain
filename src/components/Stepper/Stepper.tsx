@@ -18,8 +18,9 @@ interface Props {
 }
 
 const StyledWrapper = styled.div`
-  width: 300px;
   display: flex;
+  width: 100%;
+  justify-content: center;
 `;
 
 const sharedStyles = css`

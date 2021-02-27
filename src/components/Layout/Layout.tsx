@@ -20,6 +20,10 @@ const StyledLayout = styled.div`
 
 const StyledContent = styled.main`
   background-color: var(--clr-primary);
+  padding: 2em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 export default function Layout({ children }: Props) {
