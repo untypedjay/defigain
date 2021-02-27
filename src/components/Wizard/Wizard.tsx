@@ -1,14 +1,18 @@
-import React, { useState } from 'react';
+import React, { ChangeEvent, useState } from 'react';
 import styled from 'styled-components';
+import { FaKeyboard, FaWallet } from 'react-icons/fa';
 import { Stepper } from '../Stepper';
-import { cardStyles } from '../../styles/CardStyle';
 import { Button } from '../Button';
+import { RichRadioButton, TextInput } from '../Input';
+import { cardStyles } from '../../styles/CardStyle';
+import { StyledFlexbox } from '../../styles/FlexboxStyle';
 
 const StyledWizard = styled.div`
   ${cardStyles};
   width: 100%;
-  height: 100%;
+  height: 80%;
   padding: 3em;
+  margin: 5em;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -77,9 +81,38 @@ export default function Wizard() {
 }
 
 function DataSource() {
+  const [input, setInput] = useState<string>();
+  const iconSize = '50px';
+
+  const handleInputChange = (newInput: string) => {
+    setInput(newInput);
+  };
+
   return (
     <div>
       <h3>Choose a Data Source</h3>
+      <StyledFlexbox>
+        <RichRadioButton
+          name="data-source"
+          id="automatic"
+          checked={input === 'automatic'}
+          heading="Automatic"
+          text="Connect your wallet address"
+          onChange={handleInputChange}
+        >
+          <FaWallet size={iconSize}/>
+        </RichRadioButton>
+        <RichRadioButton
+          name="data-source"
+          id="manually"
+          checked={input === 'manually'}
+          heading="Manually"
+          text="Add data to the app manually"
+          onChange={handleInputChange}
+        >
+          <FaKeyboard size={iconSize}/>
+        </RichRadioButton>
+      </StyledFlexbox>
     </div>
   );
 }
@@ -93,9 +126,21 @@ function Widgets() {
 }
 
 function Name() {
+  const [name, setName] = useState<string>('');
+
+  const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setName(event.target.value);
+  };
+
   return (
     <div>
       <h3>Name Your Portfolio</h3>
+      <TextInput
+        onChange={handleInputChange}
+        placeholder="Enter portfolio name..."
+      >
+        { name }
+      </TextInput>
     </div>
   );
 }
