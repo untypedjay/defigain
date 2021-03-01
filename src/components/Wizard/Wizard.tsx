@@ -1,4 +1,5 @@
 import React, { ChangeEvent, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import { FaKeyboard, FaWallet } from 'react-icons/fa';
 import { Stepper } from '../Stepper';
@@ -28,6 +29,8 @@ const StyledWizardFooter = styled.div`
 
 export default function Wizard() {
   const [activeStep, setActiveStep] = useState(1);
+  const [portfolioName, setPortfolioName] = useState<string>('');
+  const history = useHistory();
   const stepAmount = 3;
 
   const handleNext = () => {
@@ -43,8 +46,8 @@ export default function Wizard() {
   };
 
   const createPortfolio = () => {
-    alert('Portfolio created');
-  }
+    history.push(`/portfolios/${portfolioName}`);
+  };
 
   const renderWizardContent = () => {
     switch (activeStep) {
@@ -53,7 +56,7 @@ export default function Wizard() {
       case 2:
         return <Widgets/>;
       case 3:
-        return <Name/>;
+        return <Name name={portfolioName} setName={setPortfolioName}/>;
     }
   };
 
@@ -125,9 +128,12 @@ function Widgets() {
   );
 }
 
-function Name() {
-  const [name, setName] = useState<string>('');
+interface NameProps {
+  name: string;
+  setName: (newInput: string) => void;
+}
 
+function Name({ name, setName }: NameProps) {
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     setName(event.target.value);
   };
