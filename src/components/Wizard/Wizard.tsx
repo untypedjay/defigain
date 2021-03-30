@@ -30,8 +30,9 @@ const StyledWizardFooter = styled.div`
 export default function Wizard() {
   const [activeStep, setActiveStep] = useState(1);
   const [portfolioName, setPortfolioName] = useState<string>('');
+  const [addresses, setAddresses] = useState<string[]>([]);
   const history = useHistory();
-  const stepAmount = 3;
+  const stepAmount = 4;
 
   const handleNext = () => {
     if (activeStep < stepAmount) {
@@ -54,8 +55,10 @@ export default function Wizard() {
       case 1:
         return <DataSource/>;
       case 2:
-        return <Widgets/>;
+        return <DataInput addresses={addresses} setAddresses={setAddresses}/>;
       case 3:
+        return <Widgets/>;
+      case 4:
         return <Name name={portfolioName} setName={setPortfolioName}/>;
     }
   };
@@ -80,7 +83,7 @@ export default function Wizard() {
         </Button>
       </StyledWizardFooter>
     </StyledWizard>
-  )
+  );
 }
 
 function DataSource() {
@@ -100,7 +103,7 @@ function DataSource() {
           id="automatic"
           checked={input === 'automatic'}
           heading="Automatic"
-          text="Connect your wallet address"
+          text="Connect your wallet addresses"
           onChange={handleInputChange}
         >
           <FaWallet size={iconSize}/>
@@ -118,6 +121,30 @@ function DataSource() {
       </StyledFlexbox>
     </div>
   );
+}
+
+interface DataInputProps {
+  addresses: string[];
+  setAddresses: (newAddresses: string[]) => void;
+}
+
+function DataInput({ addresses, setAddresses }: DataInputProps) {
+  const [currentAddress, setCurrentAddress] = useState('');
+  const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setCurrentAddress(event.target.value);
+  };
+
+  return (
+    <div>
+      <h3>Data Input</h3>
+      <TextInput
+        onChange={handleInputChange}
+        placeholder="Enter DeFiChain address..."
+      >
+        { currentAddress }
+      </TextInput>
+    </div>
+  )
 }
 
 function Widgets() {
