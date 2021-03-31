@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useState } from 'react';
+import React, { KeyboardEvent, ChangeEvent, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import { FaKeyboard, FaWallet } from 'react-icons/fa';
@@ -134,12 +134,19 @@ function DataInput({ addresses, setAddresses }: DataInputProps) {
     setCurrentAddress(event.target.value);
   };
 
+  const handleKeyPress = (event: KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === 'Enter') {
+      alert('Enter');
+    }
+  };
+
   return (
     <div>
       <h3>Data Input</h3>
       <TextInput
         onChange={handleInputChange}
         placeholder="Enter DeFiChain address..."
+        onKeyPress={handleKeyPress}
       >
         { currentAddress }
       </TextInput>
