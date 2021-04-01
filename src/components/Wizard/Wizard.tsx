@@ -30,7 +30,7 @@ const StyledWizardFooter = styled.div`
 export default function Wizard() {
   const [activeStep, setActiveStep] = useState(1);
   const [portfolioName, setPortfolioName] = useState<string>('');
-  const [addresses, setAddresses] = useState<string[]>([]);
+  const [addresses, setAddresses] = useState<string[]>(['sdflksjflsdkj']);
   const history = useHistory();
   const stepAmount = 4;
 
@@ -136,13 +136,25 @@ function DataInput({ addresses, setAddresses }: DataInputProps) {
 
   const handleKeyPress = (event: KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter') {
-      alert('Enter');
+      if (addresses.indexOf(currentAddress) !== -1) {
+        alert('This address has already been added!');
+      } else {
+        const newAddresses = [...addresses];
+        newAddresses.push(currentAddress);
+        setAddresses(newAddresses);
+      }
+      setCurrentAddress('');
     }
   };
 
   return (
     <div>
       <h3>Data Input</h3>
+      {
+        addresses.map((address: string) => (
+          <p key={address}>{ address }</p>
+        ))
+      }
       <TextInput
         onChange={handleInputChange}
         placeholder="Enter DeFiChain address..."
