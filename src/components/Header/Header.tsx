@@ -1,20 +1,13 @@
 import React, { ChangeEvent, useState } from 'react';
 import { useLocation, Link } from 'react-router-dom';
-import styled from 'styled-components';
 import { FaCog } from 'react-icons/fa';
 import { Breadcrumb } from '../Breadcrumb';
 import { Search } from '../Input';
-
-const StyledHeader = styled.header`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0.5em 1em;
-  font-size: 1.2rem;
-`;
+import { SETTINGS_ROUTE } from '../../constants';
+import { StyledHeader } from './Header.styles';
 
 export default function Header() {
-  const [search, setSearch] = useState<string>('');
+  const [search, setSearch] = useState('');
   const location = useLocation();
 
   const handleSearchChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -25,7 +18,7 @@ export default function Header() {
     <StyledHeader>
       <Breadcrumb>{ location.pathname }</Breadcrumb>
       <Search onChange={handleSearchChange}>{ search }</Search>
-      <Link to="/settings" title="Settings"><FaCog/></Link>
+      <Link to={SETTINGS_ROUTE} title="Settings"><FaCog/></Link>
     </StyledHeader>
   );
 }

@@ -1,30 +1,11 @@
 import React, { ReactNode } from 'react';
 import { Menu } from '../Menu';
 import { Header } from '../Header';
-import styled from 'styled-components';
+import { StyledLayout, StyledContent } from './Layout.styles';
 
 interface Props {
   children: ReactNode;
 }
-
-const StyledLayout = styled.div`
-  height: 100%;
-  display: grid;
-  grid-template-columns: 80px auto;
-  grid-template-rows: 80px auto;
-  
-  nav {
-    grid-row-end: span 2;
-  }
-`;
-
-const StyledContent = styled.main`
-  background-color: var(--clr-primary);
-  padding: 2em;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
 
 export default function Layout({ children }: Props) {
   return (

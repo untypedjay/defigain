@@ -7,7 +7,12 @@ interface Props {
   placeholder?: string;
 }
 
-export default function TextInput({ children, onChange, onKeyPress, placeholder }: Props) {
+export default function TextInput({
+  children,
+  onChange,
+  onKeyPress,
+  placeholder
+}: Props) {
   return (
     <input
       value={children}

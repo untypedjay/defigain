@@ -7,6 +7,7 @@ interface Props {
 
 export default function Portfolio({ match }: Props) {
   const { portfolioName } = match.params;
+
   return (
     <Layout>
       Portfolio { portfolioName }

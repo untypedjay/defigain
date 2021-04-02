@@ -1,25 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import styled from 'styled-components';
 import { capitalize, formatBasepath, formatPath } from '../../util/converter';
+import { StyledBasepath, StyledBreadcrumb } from './Breadcrumb.styles';
 
 interface Props {
   children: string;
 }
-
-const StyledBreadcrumb = styled.p`
-  color: var(--clr-text);
-  width: 400px;
-`;
-
-const StyledBasepath = styled.span`
-  color: var(--clr-disabled);
-  
-  a {
-    color: var(--clr-disabled);
-    text-decoration: none;
-  }
-`;
 
 export default function Breadcrumb({ children }: Props) {
   const renderBasepath = () => {
