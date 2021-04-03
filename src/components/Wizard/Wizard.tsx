@@ -5,6 +5,8 @@ import { Stepper } from '../Stepper';
 import { Button } from '../Button';
 import { StyledWizard, StyledFooter } from './Wizard.styles';
 import { PORTFOLIOS_ROUTE } from '../../constants';
+import { addPortfolio } from '../../services/portfolio';
+import { createPortfolioObject } from '../../util/converter';
 
 export default function Wizard() {
   const history = useHistory();
@@ -26,7 +28,11 @@ export default function Wizard() {
   };
 
   const createPortfolio = () => {
-    history.push(`${PORTFOLIOS_ROUTE}/${portfolioName}`);
+    if (!addPortfolio(createPortfolioObject(portfolioName, addresses))) {
+      alert('A portfolio with this name already exists!');
+    } else {
+      history.push(`${PORTFOLIOS_ROUTE}/${portfolioName}`);
+    }
   };
 
   const renderWizardContent = () => {

@@ -35,3 +35,14 @@ export function createSteps(amount: number) {
 
   return result;
 }
+
+export function createPortfolioObject(name: string, addresses: string[]) {
+  return {
+    name,
+    addresses,
+    lastUpdate: JSON.stringify(Date.now()),
+    widgets: [
+      'balance'
+    ]
+  };
+}

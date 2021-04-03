@@ -1,7 +1,7 @@
 import { findByProperty } from '../util/helper';
 
 export function getAllPortfolios() {
-  return JSON.parse(localStorage.getItem('portfolios') || '');
+  return JSON.parse(localStorage.getItem('portfolios') || '[]');
 }
 
 export function getPortfolioByName(portfolioName: string) {
@@ -10,6 +10,9 @@ export function getPortfolioByName(portfolioName: string) {
 }
 
 export function addPortfolio(portfolio: any) {
+  if (getPortfolioByName(portfolio.name) !== null) {
+    return false;
+  }
   const portfolios = getAllPortfolios();
   portfolios.push(portfolio);
   localStorage.setItem('portfolios', JSON.stringify(portfolios));

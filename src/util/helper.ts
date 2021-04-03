@@ -1,9 +1,11 @@
 export function findByProperty(array: any[], propertyName: string, keyword: string) {
+  let found = null;
   array.forEach((item: any) => {
     if (item[propertyName] === keyword) {
-      return item;
+      found = item;
+      return;
     }
   });
 
-  return null;
+  return found;
 }
