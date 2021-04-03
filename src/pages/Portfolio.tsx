@@ -3,6 +3,7 @@ import { Layout } from '../components/Layout';
 import NotFound from './NotFound';
 import { getPortfolioByName } from '../services/portfolio';
 import { getAccount } from '../api/defichain';
+import { BalancesWidget } from '../widgets';
 
 interface Props {
   match: any;
@@ -35,7 +36,8 @@ export default function Portfolio({ match }: Props) {
   return (
     <Layout>
       {
-        isLoading ? 'Loading...' : `Portfolio: ${portfolio.name}`
+        isLoading ? 'Loading...' :
+        <BalancesWidget balances={balance}/>
       }
     </Layout>
   );
