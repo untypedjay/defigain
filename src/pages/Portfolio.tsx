@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
+import { BalanceWidget } from '../widgets';
 import { Layout } from '../components/Layout';
 import NotFound from './NotFound';
 import { getPortfolioByName } from '../services/portfolio';
 import { getAccount } from '../api/defichain';
-import { BalancesWidget } from '../widgets';
+import { getAmount, getToken } from '../util/helper';
 
 interface Props {
   match: any;
@@ -11,14 +12,27 @@ interface Props {
 
 export default function Portfolio({ match }: Props) {
   const [isLoading, setIsLoading] = useState(true);
-  const [balance, setBalance] = useState<any[]>([]);
+  const [balance, setBalance] = useState<any>({});
   const { portfolioName } = match.params;
   const portfolio: any = getPortfolioByName(portfolioName);
 
+  const addToBalance = (balance: any, additions: any) => {
+    additions.forEach((addition: any) => {
+      const token = getToken(addition);
+      const amount = getAmount(addition);
+
+      if (balance[token]) {
+        balance[token] = balance[token] + amount;
+      } else {
+        balance[token] = amount;
+      }
+    });
+  };
+
   const loadData = async () => {
-    const responses = [];
+    const responses = {};
     for (let index in portfolio.addresses) {
-      responses.push(await getAccount(portfolio.addresses[index]));
+      addToBalance(responses, await getAccount(portfolio.addresses[index]));
     }
 
     setBalance(responses);
@@ -37,7 +51,7 @@ export default function Portfolio({ match }: Props) {
     <Layout>
       {
         isLoading ? 'Loading...' :
-        <BalancesWidget balances={balance}/>
+        <BalanceWidget balances={balance}/>
       }
     </Layout>
   );

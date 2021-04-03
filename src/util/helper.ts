@@ -9,3 +9,11 @@ export function findByProperty(array: any[], propertyName: string, keyword: stri
 
   return found;
 }
+
+export function getToken(balanceString: string) {
+  return balanceString.split('@')[1].toLowerCase();
+}
+
+export function getAmount(balanceString: string) {
+  return parseFloat(balanceString.split('@')[0]);
+}
