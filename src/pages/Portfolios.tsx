@@ -4,16 +4,20 @@ import { PortfolioCard } from '../components/Card';
 import { getAllPortfolios } from '../services/portfolio';
 
 export default function Portfolios() {
-  console.log(getAllPortfolios());
+  const portfolios = getAllPortfolios();
 
   return (
     <Layout>
-      <PortfolioCard/>
-      <PortfolioCard/>
-      <PortfolioCard/>
-      <PortfolioCard/>
-      <PortfolioCard/>
-      <PortfolioCard/>
+      { portfolios.length > 0 ?
+        <div>
+          {
+            portfolios.map((portfolio: any) => (
+              <PortfolioCard key={portfolio.name}>{ portfolio }</PortfolioCard>
+            ))
+          }
+        </div> :
+        <p>No projects yet.</p>
+      }
     </Layout>
   );
 }
