@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { BalanceWidget } from '../widgets';
 import { Layout } from '../components/Layout';
 import NotFound from './NotFound';
@@ -17,6 +17,7 @@ export default function Portfolio({ match }: Props) {
   const portfolio: any = getPortfolioByName(portfolioName);
 
   const addToBalance = (balance: any, additions: any) => {
+    console.log(additions)
     additions.forEach((addition: any) => {
       const token = getToken(addition);
       const amount = getAmount(addition);
@@ -29,7 +30,7 @@ export default function Portfolio({ match }: Props) {
     });
   };
 
-  const loadData = async () => {
+  const loadData = useCallback(async () => {
     const responses = {};
     for (let index in portfolio.addresses) {
       addToBalance(responses, await getAccount(portfolio.addresses[index]));
@@ -37,11 +38,11 @@ export default function Portfolio({ match }: Props) {
 
     setBalance(responses);
     setIsLoading(false);
-  };
+  }, [portfolio]);
 
   useEffect(() => {
     loadData();
-  }, []);
+  }, [loadData]);
 
   if (!portfolio) {
     return <NotFound/>;
