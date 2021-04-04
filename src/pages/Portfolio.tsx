@@ -12,12 +12,12 @@ interface Props {
 
 export default function Portfolio({ match }: Props) {
   const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState('');
   const [balance, setBalance] = useState<any>({});
   const { portfolioName } = match.params;
   const portfolio: any = getPortfolioByName(portfolioName);
 
   const addToBalance = (balance: any, additions: any) => {
-    console.log(additions)
     additions.forEach((addition: any) => {
       const token = getToken(addition);
       const amount = getAmount(addition);
@@ -31,12 +31,17 @@ export default function Portfolio({ match }: Props) {
   };
 
   const loadData = useCallback(async () => {
-    const responses = {};
+    const temporaryBalance = {};
     for (let index in portfolio.addresses) {
-      addToBalance(responses, await getAccount(portfolio.addresses[index]));
+      const response = await getAccount(portfolio.addresses[index]);
+      if (!Array.isArray(response)) {
+        setError('An error occurred while fetching data from the blockchain. Please try again later.');
+        return;
+      }
+      addToBalance(temporaryBalance, response);
     }
 
-    setBalance(responses);
+    setBalance(temporaryBalance);
     setIsLoading(false);
   }, [portfolio]);
 
@@ -50,8 +55,9 @@ export default function Portfolio({ match }: Props) {
 
   return (
     <Layout>
+      { error && <p>{ error }</p> }
       {
-        isLoading ? 'Loading...' :
+        isLoading && !error ? 'Loading...' :
         <BalanceWidget balances={balance}/>
       }
     </Layout>
